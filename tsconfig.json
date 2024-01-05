@@ -1,5 +1,11 @@
 {
+  "include": ["**/*.ts", "**/*.tsx", "**/**/*.ts", "**/**/*.tsx"],
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "jsx": "react-jsx",
     /* Visit https://aka.ms/tsconfig to read more about this file */
 
     /* Projects */
