@@ -1,5 +1,5 @@
+import React, { ChangeEvent, KeyboardEvent } from "react";
 import styled from "styled-components";
-import PropTypes from "prop-types";
 
 /**
  * @param {object} props
@@ -12,7 +12,19 @@ import PropTypes from "prop-types";
  * @param {string} id
  * @param {boolean} valid
  */
-const Input = ({
+
+interface InputProps {
+  type: string;
+  value: string;
+  className?: string;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
+  placeholder?: string;
+  id?: string;
+  valid?: boolean;
+}
+
+const Input: React.FC<InputProps> = ({
   type,
   value,
   className,
@@ -36,20 +48,9 @@ const Input = ({
   );
 };
 
-Input.propTypes = {
-  type: PropTypes.string,
-  value: PropTypes.string,
-  className: PropTypes.string,
-  onChange: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  placeholder: PropTypes.string,
-  id: PropTypes.string,
-  valid: PropTypes.bool,
-};
-
 export default Input;
 
-const StyledInput = styled.input`
+const StyledInput = styled.input<{ valid?: boolean }>`
   width: 240px;
   padding: 15px;
   font-size: 13px;

@@ -1,11 +1,16 @@
 import { atom, selector } from "recoil";
 
-export const titleState = atom({
+export interface OptionTypes {
+  name: string;
+  image: string | null;
+}
+
+export const titleState = atom<string>({
   key: "titleState",
   default: "",
 });
 
-export const contentState = atom({
+export const contentState = atom<string>({
   key: "contentState",
   default: "",
 });
@@ -20,7 +25,7 @@ export const timeLimitState = atom({
   default: 1440,
 });
 
-export const optionState = atom({
+export const optionState = atom<OptionTypes[]>({
   key: "optionState",
   default: [
     { name: "", image: null },

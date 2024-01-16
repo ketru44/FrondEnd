@@ -16,7 +16,7 @@ const LoginPage = () => {
   const [value, setValue] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
-  const handleOnChange = (e) => {
+  const handleOnChange = (e: any) => {
     const { id, value } = e.target;
     setValue((prev) => ({ ...prev, [id]: value }));
   };
@@ -32,7 +32,7 @@ const LoginPage = () => {
           navigate("/");
           window.location.reload();
         })
-        .catch((err) => {
+        .catch((err: any) => {
           alert(err.data.message);
         });
     } else {
@@ -40,7 +40,7 @@ const LoginPage = () => {
     }
   };
 
-  const handleEnterKey = (e) => {
+  const handleEnterKey = (e: any) => {
     if (e.key === "Enter") {
       handleLogin();
     }
