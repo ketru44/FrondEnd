@@ -1,4 +1,4 @@
-import React, { ReactNode, MouseEventHandler } from "react";
+import React, { ReactNode } from "react";
 
 /**
  * @param {object} prop
