@@ -20,7 +20,7 @@ interface InputGroupProps {
   type: string;
   value: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  onKeyDown: (event: KeyboardEvent<HTMLInputElement>) => void;
+  onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
   className?: string;
   placeholder?: string;
   label: string;
