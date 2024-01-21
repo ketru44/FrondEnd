@@ -9,11 +9,11 @@ import PropTypes from "prop-types";
  * @param {string} prop.page
  */
 
-const SubMyPageHeader = ({ page }) => {
+const SubMyPageHeader = ({ page } : {page: string}) => {
   page = page || "내가 한 질문";
   return (
     <Nav>
-      <BackButton />
+      <BackButton upload = {false} />
       <PageName>
         <Title>{page}</Title>
       </PageName>

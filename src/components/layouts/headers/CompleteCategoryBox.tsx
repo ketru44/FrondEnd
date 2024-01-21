@@ -21,10 +21,10 @@ export const CompleteCategoryBox = () => {
 
   const [drops, setDrops] = useState({ sort: false, content: false });
 
-  const sortDropdownRef = useRef(null);
-  const contentDropdownRef = useRef(null);
+  const sortDropdownRef = useRef<HTMLDivElement | null>(null);
+  const contentDropdownRef = useRef<HTMLDivElement | null>(null);
 
-  const toggleDropdown = (dropdownType) => {
+  const toggleDropdown = (dropdownType: string) => {
     if (dropdownType === "sort") {
       setDrops({ sort: !drops.sort, content: drops.content });
     } else if (dropdownType === "content") {
@@ -33,35 +33,35 @@ export const CompleteCategoryBox = () => {
   };
 
   useEffect(() => {}, [sort, content]);
-  const handleSort = (num) => {
+  const handleSort = (num : number) => {
     setSort(sortList[num].value);
     setSortName(sortList[num].category);
     toggleDropdown("sort");
   };
 
-  const handleContent = (num) => {
+  const handleContent = (num : number) => {
     setContent(contentList[num].value);
     setContentName(contentList[num].category);
     toggleDropdown("content");
   };
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleClickOutside = (event : MouseEvent) => {
       if (
         sortDropdownRef.current &&
-        !sortDropdownRef.current.contains(event.target) &&
+        !sortDropdownRef.current.contains(event.target as Node) &&
         contentDropdownRef.current &&
-        !contentDropdownRef.current.contains(event.target)
+        !contentDropdownRef.current.contains(event.target as Node)
       ) {
         setDrops({ sort: false, content: false });
       } else if (
         sortDropdownRef.current &&
-        !sortDropdownRef.current.contains(event.target)
+        !sortDropdownRef.current.contains(event.target as Node)
       ) {
         setDrops({ sort: false, content: drops.content });
       } else if (
         contentDropdownRef.current &&
-        !contentDropdownRef.current.contains(event.target)
+        !contentDropdownRef.current.contains(event.target as Node)
       ) {
         setDrops({ sort: drops.sort, content: false });
       }
@@ -93,7 +93,7 @@ export const CompleteCategoryBox = () => {
                     style={
                       item.value === sort
                         ? { color: Palette.font_blue, fontWeight: "bolder" }
-                        : null
+                        : undefined
                     }
                   >
                     {item.category}
@@ -120,7 +120,7 @@ export const CompleteCategoryBox = () => {
                     style={
                       item.value === content
                         ? { color: Palette.font_blue, fontWeight: "bolder" }
-                        : null
+                        : undefined
                     }
                   >
                     {item.category}

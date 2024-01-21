@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
  * @param {object} props
  * @param {string} props.page
  */
-const Main = ({ page }) => {
+const Main = ({ page } : {page: string}) => {
   return (
     <Nav>
       {page === "main" ? <CategoryBox /> : <CompleteCategoryBox />}
