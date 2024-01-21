@@ -14,13 +14,14 @@ import Resizer from "react-image-file-resizer";
  * @param {string} param.src
  */
 
-const Img = ({ id, src }) => {
+const Img = ({ id, src }: { id: string; src: string }) => {
   const [imgFile, setImgFile] = useState("");
   const [option, setOption] = useRecoilState(optionState);
   const [img, setImg] = useState(false);
-  const imgRef = useRef();
+  const imgRef = useRef<any>();
+  //타입 수정
 
-  const resizeFile = (file) =>
+  const resizeFile = (file: Blob) =>
     new Promise((resolve) => {
       Resizer.imageFileResizer(
         file,
@@ -36,7 +37,7 @@ const Img = ({ id, src }) => {
       );
     });
 
-  const saveImgFile = async (e) => {
+  const saveImgFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = await imgRef.current.files[0];
     const supportedFormats = ["image/jpeg", "image/png"];
     if (!supportedFormats.includes(file.type)) {
@@ -59,10 +60,10 @@ const Img = ({ id, src }) => {
     }
   };
 
-  const inputImg = (src) => {
+  const inputImg = (src: string) => {
     setOption((prop) => {
       return prop.map((choice, index) => {
-        if (id == index) {
+        if (Number(id) == index) {
           return { ...choice, image: src };
         } else {
           return choice;
@@ -72,7 +73,7 @@ const Img = ({ id, src }) => {
   };
   useEffect(() => {
     option.map((choice, index) => {
-      if (choice.image && index == id) {
+      if (choice.image && index == Number(id)) {
         return setImg(true);
       }
     });

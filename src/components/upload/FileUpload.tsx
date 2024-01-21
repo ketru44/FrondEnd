@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import Icon from "../common/Icon";
+import Icon from "@/components/common/Icon";
 import { GoFileMedia } from "react-icons/go";
-import PropTypes from "prop-types";
 
 /**
  *
@@ -11,9 +10,15 @@ import PropTypes from "prop-types";
  * @returns
  */
 
-const FileUpload = ({ func, id }) => {
+const FileUpload = ({
+  func,
+  id,
+}: {
+  func: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  id: string;
+}) => {
   return (
-    <FileUploadContainer id={id}>
+    <FileUploadContainer id={Number(id)}>
       <label htmlFor="file" className="fileLabel" id={id}>
         <Icon size="23px" color="#7d7d7d">
           <GoFileMedia />
@@ -33,12 +38,7 @@ const FileUpload = ({ func, id }) => {
   );
 };
 
-FileUpload.propTypes = {
-  func: PropTypes.func.isRequired,
-  id: PropTypes.number.isRequired,
-};
-
-const FileUploadContainer = styled.div`
+const FileUploadContainer = styled.div<{ id: number }>`
   margin: 0;
   .fileInput {
     display: none;

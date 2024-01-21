@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
  * @param {object} param
  * @param {string} param.name
  */
-const TextArea = ({ name }) => {
+const TextArea = ({ name }: { name: string }) => {
   const [upload, setUpload] = useRecoilState(contentState);
   const textArea = useRef();
 
