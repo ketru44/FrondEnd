@@ -16,7 +16,7 @@ const UploadButton = () => {
   const [active, setActive] = useState(false);
   const [doOnce, setDoOnce] = useState(true);
   const mutation = useMutation({
-    mutationFn: (payload) => uploadVote(payload),
+    mutationFn: (payload: number) => uploadVote(payload),
   });
   useEffect(() => {
     if (!!count.title && count.options.length > 1) {
