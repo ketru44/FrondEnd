@@ -2,7 +2,7 @@ import routes from "@/routes";
 import { loginInstance, instance } from "./index";
 import { removeCookie, setCookie } from "./Cookie";
 
-export const getToken = (res) => {
+export const getToken = (res: any) => {
   const accessToken = res.data.data.accessToken;
   const accessExpiredTime = res.data.data.accessExpiredTime;
   const refreshToken = res.data.data.refreshToken;
@@ -20,7 +20,7 @@ export const removeToken = () => {
   location.href = routes.login;
 };
 
-export const loginInquire = async (data) => {
+export const loginInquire = async (data: any) => {
   const { email, password } = data;
 
   const res = await instance.post(`/api/auth/login`, {
