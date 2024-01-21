@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import PropTypes from "prop-types";
 
 /**
  *
@@ -14,7 +13,7 @@ import PropTypes from "prop-types";
  * @param {string} prop.className 클래스 이름
  *
  */
-const Icon = ({
+const Icon: React.FC<IconType> = ({
   children,
   reverse,
   size,
@@ -43,19 +42,19 @@ const Icon = ({
   );
 };
 
-Icon.propTypes = {
-  children: PropTypes.node.isRequired,
-  reverse: PropTypes.bool,
-  size: PropTypes.string,
-  color: PropTypes.string,
-  onClick: PropTypes.func,
-  hoverColor: PropTypes.string,
-  hoverBackColor: PropTypes.string,
-  margin: PropTypes.number,
-  modal: PropTypes.bool,
-  className: PropTypes.string,
+type IconType = {
+  children?: React.ReactNode;
+  reverse?: boolean | string;
+  size?: string;
+  color?: string;
+  onClick?: () => void;
+  hoverColor?: string;
+  hoverBackColor?: string;
+  margin?: number;
+  modal?: boolean;
+  className?: string;
 };
-const IconCss = styled.div`
+const IconCss = styled.div<IconType>`
   cursor: pointer;
   font-size: ${(props) => props.size || "26px"};
   transform: ${(props) => props.reverse && "scaleX(-1)"};
@@ -65,7 +64,7 @@ const IconCss = styled.div`
     background-color: ${(props) => props.hoverBackColor};
   }
   margin: ${(props) => props.margin};
-  visibility: ${(props) => props.modal};
+  visibility: ${(props: any) => props.modal};
 `;
 
 export default Icon;

@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import Img from "./Img";
 import { GoX } from "react-icons/go";
-import PropTypes from "prop-types";
-import React from "react";
+import { OptionTypes } from "@/utils/UploadAtom";
 
 /**
  *
@@ -15,7 +14,21 @@ import React from "react";
  * @returns
  */
 
-const ChoiceOption = ({ id, data, inputOption, deleteOption, src }) => {
+export interface ChoiceOptionProps {
+  id: number;
+  data: OptionTypes;
+  inputOption: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  deleteOption: (event: React.MouseEvent<HTMLDivElement>) => void;
+  src: string | null;
+}
+
+const ChoiceOption = ({
+  id,
+  data,
+  inputOption,
+  deleteOption,
+  src,
+}: ChoiceOptionProps) => {
   const optionId = id + 1;
 
   return (
@@ -23,12 +36,12 @@ const ChoiceOption = ({ id, data, inputOption, deleteOption, src }) => {
       <Container>
         <div
           className="xbutton"
-          id={id}
+          id={String(id)}
           onClick={(e) => {
             deleteOption(e);
           }}
         >
-          <GoX className="xIcon" id={id} />
+          <GoX className="xIcon" id={String(id)} />
         </div>
 
         <input
@@ -38,19 +51,12 @@ const ChoiceOption = ({ id, data, inputOption, deleteOption, src }) => {
           }}
           placeholder={`선택지 ${optionId}`}
           className="nameInput"
-          id={id}
+          id={String(id)}
         ></input>
         <Img id={id} src={src}></Img>
       </Container>
     </div>
   );
-};
-ChoiceOption.propTypes = {
-  id: PropTypes.number.isRequired,
-  data: PropTypes.object.isRequired,
-  inputOption: PropTypes.func.isRequired,
-  deleteOption: PropTypes.func.isRequired,
-  src: PropTypes.string.isRequired,
 };
 
 const Container = styled.div`

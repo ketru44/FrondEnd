@@ -4,7 +4,7 @@ import Icon from "../common/Icon";
 import { useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import { categoryState, timeLimitState } from "@/utils/UploadAtom";
-import { category, deadline } from "../upload/CategoryNDeadLine";
+import { category, deadline } from "./CategoryNDeadLine";
 import PropTypes from "prop-types";
 
 /**
@@ -13,9 +13,22 @@ import PropTypes from "prop-types";
  * @param {array} param.datas
  * @param {string} param.name
  */
-const Option = ({ datas, name }) => {
-  const downRef = useRef();
-  const [list, setList] = useState(false);
+export interface visibleTypes {
+  list: boolean;
+}
+export type OptionProps = {
+  datas: { value: string | number; name: string }[];
+  name: string;
+  def?: number;
+};
+export interface Props {
+  target: { value: any };
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+const Option: React.FC<OptionProps> = ({ datas, name }) => {
+  const downRef = useRef<HTMLDivElement>(null);
+  const [list, setList] = useState<boolean>(false);
   const [categoryStates, setCategoryState] = useRecoilState(categoryState);
   const [timeLimitStates, setTimeLimitState] = useRecoilState(timeLimitState);
 
@@ -36,14 +49,13 @@ const Option = ({ datas, name }) => {
     }
   });
 
-  const onClickCategory = (e) => {
+  const onClickCategory = (e: Props) => {
+    const { value } = e.target;
     if (name == "카테고리") {
-      const { value } = e.target;
       setCategoryState(value);
       setList(!list);
     } else {
-      const { value } = e.target;
-      setTimeLimitState(value);
+      setTimeLimitState(Number(value));
       setList(!list);
     }
   };
@@ -64,16 +76,17 @@ const Option = ({ datas, name }) => {
             if (name === "카테고리") {
               return data.value == categoryStates ? "active" : "";
             } else {
-              return data.value == timeLimitStates ? "active" : "";
+              return Number(data.value) == timeLimitStates ? "active" : "";
             }
           };
 
           return (
             <li key={name === "카테고리" ? index + 100 : index} className="Li">
               <button
-                onClick={(e) => onClickCategory(e)}
+                onClick={(e: any) => onClickCategory(e)}
+                //여기 타입 어떻게 해야할까요....ㅜㅠ
                 value={data.value}
-                list={list}
+                // list={list}
                 className={`optionLi ${className()}`}
               >
                 {" "}
@@ -87,12 +100,7 @@ const Option = ({ datas, name }) => {
   );
 };
 
-Option.propTypes = {
-  datas: PropTypes.array.isRequired,
-  name: PropTypes.string.isRequired,
-};
-
-const Select = styled.ul`
+const Select = styled.ul<visibleTypes>`
   list-style: none;
   padding: 0;
   width: 160px;

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { Palette } from "@/styles/Palette";
 import PropTypes from "prop-types";
+import { Props } from "./Option";
 
 /**
  *
@@ -10,7 +11,7 @@ import PropTypes from "prop-types";
  * @param {function} param.onClick
  */
 
-const PlusBtn = ({ onClick }) => {
+const PlusBtn = ({ onClick }: { onClick: () => void }) => {
   return (
     <PlusBtnStyle>
       <Icon

@@ -8,7 +8,13 @@ import PropTypes from "prop-types";
  * @param {string} param.name
  * @param {string} param.placeholder
  */
-const Input = ({ name, placeholder }) => {
+const Input = ({
+  name,
+  placeholder,
+}: {
+  name: string;
+  placeholder: string;
+}) => {
   const [upload, setUpload] = useRecoilState(titleState);
 
   return (
