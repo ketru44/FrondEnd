@@ -11,7 +11,7 @@ import Swal from "sweetalert2";
 
 const UploadButton = () => {
   const navigate = useNavigate();
-  const [count, setCount] = useRecoilState(uploadSelector);
+  const [count, setCount] = useRecoilState<any>(uploadSelector);
   const resetList = useResetRecoilState(uploadSelector);
   const [active, setActive] = useState(false);
   const [doOnce, setDoOnce] = useState(true);
@@ -20,10 +20,10 @@ const UploadButton = () => {
   });
   useEffect(() => {
     if (!!count.title && count.options.length > 1) {
-      const act = count.options.filter((item) => {
+      const act = count.options.filter((item: any) => {
         return item.name === "";
       });
-      setActive(!act.length > 0);
+      setActive(Number(!act.length) > 0);
     }
     if (count.options.length < 2 || !count.title) {
       setActive(false);
@@ -48,7 +48,7 @@ const UploadButton = () => {
           navigate(routes.home);
           setDoOnce(true);
         },
-        onError: (error) => {
+        onError: (error: any) => {
           alert(error?.data.message);
         },
       });
@@ -66,7 +66,7 @@ const UploadButton = () => {
   );
 };
 
-const UploadButtonStyle = styled.div`
+const UploadButtonStyle = styled.div<{ active: boolean }>`
   .uploadBtn {
     background-color: ${(prop) =>
       prop.active ? Palette["button_blue"] : Palette["percent_gray"]};
