@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { Palette } from "@/styles/Palette";
-import PropTypes from "prop-types";
 
 /**
  * @param {object} props
@@ -9,8 +8,13 @@ import PropTypes from "prop-types";
  * @param {string} props.src
  * @return {JSX.Element}
  */
+interface ProfileProps {
+  userName: string;
+  email: string;
+  src?: string;
+}
 
-const Profile = ({ userName, email, src }) => {
+const Profile: React.FC<ProfileProps> = ({ userName, email, src }) => {
   return (
     <ProfileStyle>
       <div className="userImg">
@@ -22,12 +26,6 @@ const Profile = ({ userName, email, src }) => {
       </div>
     </ProfileStyle>
   );
-};
-
-Profile.propTypes = {
-  userName: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  src: PropTypes.string,
 };
 
 const ProfileStyle = styled.div`
