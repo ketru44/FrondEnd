@@ -82,7 +82,7 @@ const MainPage = ({ modal }) => {
   return (
     <>
       {toast && (
-        <Alert margin="2rem" setIsAlert={setToast}>
+        <Alert margin="2rem" setIsAlert={setToast} toast={toast}>
           {" "}
           게시글이 등록되었습니다.{" "}
         </Alert>
