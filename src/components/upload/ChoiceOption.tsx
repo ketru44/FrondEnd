@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Img from "./Img";
 import { GoX } from "react-icons/go";
 import PropTypes from "prop-types";
+import React from "react";
 
 /**
  *

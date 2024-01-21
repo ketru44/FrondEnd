@@ -1,17 +1,16 @@
-import PropTypes from "prop-types";
+import React, { ReactNode } from "react";
 
 /**
  * @param {object} prop
  * @param {node} prop.children
  * @param {string} prop.className
  */
-const Box = ({ children, className }) => {
+interface BoxProps {
+  children: ReactNode;
+  className?: string;
+}
+const Box: React.FC<BoxProps> = ({ children, className }) => {
   return <div className={className}>{children}</div>;
-};
-
-Box.propTypes = {
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string,
 };
 
 export default Box;

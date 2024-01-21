@@ -1,7 +1,7 @@
+import React, { ChangeEvent, KeyboardEvent } from "react";
 import Box from "./Box";
 import Label from "./Label";
 import Input from "./Input";
-import PropTypes from "prop-types";
 
 /**
  * @param {object} props
@@ -15,8 +15,19 @@ import PropTypes from "prop-types";
  * @param {string} label
  * @param {boolean} valid
  */
-const InputGroup = ({
-  id,
+interface InputGroupProps {
+  id?: string; //React에서는 htmlFor를 설정할 때 undefined를 허용하지 않음
+  type: string;
+  value: string;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
+  className?: string;
+  placeholder?: string;
+  label: string;
+  valid?: boolean;
+}
+const InputGroup: React.FC<InputGroupProps> = ({
+  id = "",
   type,
   value,
   onChange,
@@ -40,18 +51,6 @@ const InputGroup = ({
       />
     </Box>
   );
-};
-
-InputGroup.propTypes = {
-  id: PropTypes.string,
-  type: PropTypes.string,
-  onChange: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  value: PropTypes.string,
-  className: PropTypes.string,
-  placeholder: PropTypes.string,
-  label: PropTypes.string,
-  valid: PropTypes.bool,
 };
 
 export default InputGroup;

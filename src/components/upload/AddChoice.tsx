@@ -1,14 +1,17 @@
 import ChoiceOption from "./ChoiceOption";
 import { useRecoilState } from "recoil";
-import { optionState } from "@/utils/UploadAtom";
+import { optionState, OptionTypes } from "@/utils/UploadAtom";
 import styled from "styled-components";
 import PlusBtn from "./PlusBtn";
+export interface valueTypes {
+  hasValue: number | null;
+}
 
 const AddChoice = () => {
-  const [option, setOption] = useRecoilState(optionState);
+  const [option, setOption] = useRecoilState<OptionTypes[]>(optionState);
   const AddOption = () => {
     // 선택지 추가 버튼
-    setOption((prop) => {
+    setOption((prop: OptionTypes[]) => {
       if (prop.length < 6) {
         return [...prop, { name: "", image: null }];
       } else {
@@ -17,19 +20,19 @@ const AddChoice = () => {
     });
   };
   //선택지 삭제 버튼
-  const deleteOption = (e) => {
-    setOption((prop) => {
+  const deleteOption = (e: any) => {
+    setOption((prop: OptionTypes[]) => {
       let list = [...prop];
-      return list.filter((item, index) => {
+      return list.filter((_, index: number) => {
         return index != e.target.parentElement.id;
       });
     });
   };
   //선택지 인풋 값 바꾸기
-  const inputOption = (e) => {
+  const inputOption = (e: any) => {
     const id = e.target.id;
-    setOption((prop) => {
-      return prop.map((choice, index) => {
+    setOption((prop: OptionTypes[]) => {
+      return prop.map((choice: OptionTypes, index: number) => {
         if (id == index) {
           return { ...choice, name: e.target.value };
         } else {
@@ -46,7 +49,7 @@ const AddChoice = () => {
       </div>
 
       <OptionContainer>
-        {option.map((choice, index) => {
+        {option.map((choice: OptionTypes, index: number) => {
           return (
             <ChoiceOption
               key={index}
@@ -70,7 +73,7 @@ const OptionContainer = styled.div`
   gap: 10px;
 `;
 
-const Container = styled.div`
+const Container = styled.div<valueTypes>`
   margin-top: 2rem;
   display: flex;
   flex-direction: column;
