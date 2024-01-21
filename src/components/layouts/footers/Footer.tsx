@@ -16,7 +16,7 @@ import useLogin from "@/hooks/useLogin";
 /**
  * @param {string} page 각 페이지 이름
  */
-const Footer = ({ page }) => {
+const Footer = ({ page }: {page: string}) => {
   const isLogIn = useLogin();
 
   return (

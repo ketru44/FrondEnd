@@ -14,9 +14,9 @@ import Resizer from "react-image-file-resizer";
  * @param {string} param.src
  */
 
-const Img = ({ id, src }: { id: string; src: string }) => {
-  const [imgFile, setImgFile] = useState("");
-  const [option, setOption] = useRecoilState(optionState);
+const Img = ({ id, src }: { id: number; src?: string }) => {
+  const [imgFile, setImgFile] = useState<any>("");
+  const [option, setOption] = useRecoilState<any>(optionState);
   const [img, setImg] = useState(false);
   const imgRef = useRef<any>();
   //타입 수정
@@ -60,9 +60,9 @@ const Img = ({ id, src }: { id: string; src: string }) => {
     }
   };
 
-  const inputImg = (src: string) => {
-    setOption((prop) => {
-      return prop.map((choice, index) => {
+  const inputImg = (src: string | ArrayBuffer | null) => {
+    setOption((prop: any) => {
+      return prop.map((choice: {}, index: number) => {
         if (Number(id) == index) {
           return { ...choice, image: src };
         } else {
@@ -72,7 +72,7 @@ const Img = ({ id, src }: { id: string; src: string }) => {
     });
   };
   useEffect(() => {
-    option.map((choice, index) => {
+    option.map((choice: any, index: number) => {
       if (choice.image && index == Number(id)) {
         return setImg(true);
       }
@@ -85,13 +85,13 @@ const Img = ({ id, src }: { id: string; src: string }) => {
         <ImgContainer>
           {" "}
           <div className="Div">
-            <img className="Img" src={src} id={id}></img>
+            <img className="Img" src={src} id={String(id)}></img>
           </div>
         </ImgContainer>
       ) : (
         <Container>
           <FileUploadContainer>
-            <label htmlFor={`file${id}`} className="fileLabel" id={id}>
+            <label htmlFor={`file${id}`} className="fileLabel" id={String(id)}>
               <Icon size="23px" color="#7d7d7d">
                 <GoFileMedia />
               </Icon>

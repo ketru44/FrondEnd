@@ -14,14 +14,25 @@ import {
   nicknameCheckInquire,
 } from "@/services/signup";
 
-const SignUpPage = () => {
+interface Value {
+  name: string;
+  email: string;
+  password: string;
+  passwordConfirm: string;
+}
+interface StyledErrProps {
+  name?: string;
+  email?: string;
+}
+
+const SignUpPage: React.FC = () => {
   const [allAgree, setAllAgree] = useState(false);
   const [agreeService, setAgreeService] = useState(false);
   const [agreePollcy, setAgreePollcy] = useState(false);
   const [checkName, setCheckName] = useState(false);
   const [checkEmail, setCheckEmail] = useState(false);
 
-  const [value, setValue] = useState({
+  const [value, setValue] = useState<Value>({
     name: "",
     email: "",
     password: "",
@@ -30,7 +41,7 @@ const SignUpPage = () => {
   // 유효성 검사 text 반환을 위한 커스텀 훅
   const { validText, isValid } = useValid(value);
   const navigate = useNavigate();
-  const handleOnChange = (e) => {
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
     setValue((prev) => ({ ...prev, [id]: value }));
     if (id === "name") {
@@ -39,12 +50,12 @@ const SignUpPage = () => {
       setCheckEmail(false);
     }
   };
-  const handleAllAgree = (e) => {
+  const handleAllAgree = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.checked;
     setAgreeService(value);
     setAgreePollcy(value);
   };
-  const handleAgree = (e) => {
+  const handleAgree = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
     if (name === "service-agree") {
       setAgreeService(checked);
@@ -302,12 +313,14 @@ const Policy = styled.div`
   display: flex;
   gap: 5px;
 `;
-const StyledErr = styled.div`
+const StyledErr = styled.div<StyledErrProps>`
   color: #e45151;
   font-size: 12px;
   position: relative;
-  right: ${props => (props.name === 'name' ? '50px' : props.email === 'email' ? '65px' :'60px')};
-  bottom: ${props => (props.name === 'name' ? '27px' : props.email === 'email' ? '17px' :'10px')};
+  right: ${(props) =>
+    props.name === "name" ? "50px" : props.email === "email" ? "65px" : "60px"};
+  bottom: ${(props) =>
+    props.name === "name" ? "27px" : props.email === "email" ? "17px" : "10px"};
 `;
 const DuplicateErr = styled.div`
   color: #e45151;

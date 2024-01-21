@@ -1,5 +1,5 @@
+import React, { ReactNode, MouseEventHandler } from "react";
 import styled from "styled-components";
-import PropTypes from "prop-types";
 
 /**
  * @param {object} props
@@ -10,32 +10,41 @@ import PropTypes from "prop-types";
  * @param { string } className
  */
 
-const Button = ({ children, color, onClick, disabled, className }) => {
+interface ButtonProps {
+  children: ReactNode;
+  color?: string;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
+  disabled?: boolean;
+  className?: string;
+}
+
+const Button: React.FC<ButtonProps> = ({
+  children,
+  color,
+  onClick,
+  disabled,
+  className,
+}) => {
   return (
     <StyledButton
       color={color}
       className={`button ${className}`}
       disabled={disabled}
-      onClick={(e) => {
-        onClick(e);
-      }}
+      onClick={onClick}
     >
       {children}
     </StyledButton>
   );
 };
 
-Button.propTypes = {
-  children: PropTypes.node.isRequired,
-  color: PropTypes.string,
-  onClick: PropTypes.func,
-  disabled: PropTypes.bool,
-  className: PropTypes.string,
-};
-
 export default Button;
 
-const StyledButton = styled.button`
+interface StyledButtonProps {
+  color?: string;
+  disabled?: boolean;
+}
+
+const StyledButton = styled.button<StyledButtonProps>`
   width: 280px;
   height: 50px;
   cursor: ${(props) => (props.disabled ? "auto" : "pointer")};
