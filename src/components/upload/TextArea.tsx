@@ -1,9 +1,8 @@
-import { InputStyle } from "./input";
+import { InputStyle } from "./Input";
 import styled from "styled-components";
 import { useRef } from "react";
 import { useRecoilState } from "recoil";
 import { contentState } from "@/utils/UploadAtom";
-import PropTypes from "prop-types";
 
 /**
  * @param {object} param
@@ -11,7 +10,7 @@ import PropTypes from "prop-types";
  */
 const TextArea = ({ name }: { name: string }) => {
   const [upload, setUpload] = useRecoilState(contentState);
-  const textArea = useRef();
+  const textArea = useRef<any>();
 
   const textAreaHeight = () => {
     textArea.current.style.height = 0;
@@ -25,7 +24,7 @@ const TextArea = ({ name }: { name: string }) => {
         placeholder="상세설명을 입력해주세요"
         ref={textArea}
         onChange={(e) => {
-          textAreaHeight(e);
+          textAreaHeight();
           setUpload(e.target.value);
         }}
         rows={1}
@@ -33,10 +32,6 @@ const TextArea = ({ name }: { name: string }) => {
       ></textarea>
     </TextAreaStyle>
   );
-};
-
-TextArea.propTypes = {
-  name: PropTypes.string.isRequired,
 };
 
 const TextAreaStyle = styled(InputStyle)`
