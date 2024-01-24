@@ -10,9 +10,9 @@ import { useResetRecoilState } from "recoil";
 import { BiReset } from "react-icons/bi";
 import Swal from "sweetalert2";
 import Icon from "@/components/common/Icon";
-import UploadPageHeader from "@/components/layouts/headers/UploadPageHeader";
 import { useNavigate } from "react-router-dom";
 import useLogin from "@/hooks/useLogin";
+import UploadPageHeader from "@/components/layouts/headers/UploadPageHeader";
 
 const UploadPage = () => {
   const navigate = useNavigate();
