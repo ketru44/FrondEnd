@@ -63,7 +63,7 @@ const VoteHead = ({
           ) : (
             <div className="voteTitle">
               <div className="voteNumber">{totalCount}명이 투표중입니다.</div>
-              {endDate === "infinite" ? (
+              {endDate > 30 * 24 * 60 * 60 ? (
                 <div>∞</div>
               ) : (
                 <Timer endDate={endDate} username={username} />
