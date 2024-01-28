@@ -18,9 +18,9 @@ export const completeInquire = (categoryData, pageParam) => {
   );
 };
 
-export const commentCountInquire = (id) =>{
-  return instance.get(`/votes/${id}/comments/count`)
-}
+export const commentCountInquire = (id) => {
+  return instance.get(`/votes/${id}/comments/count`);
+};
 
 export const detailInquire = (id) => {
   return instance.get(`/votes/${id}`);
@@ -30,6 +30,6 @@ export const ChatInquire = (id) => {
   return instance.get(`/votes/${id}/comments`);
 };
 
-export const closeInquire = (id)=>{
-  return instance.patch(`/votes/${id}/close`)
-}
+export const closeInquire = (id) => {
+  return instance.patch(`/votes/${id}/close`);
+};
