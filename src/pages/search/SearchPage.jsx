@@ -14,11 +14,10 @@ import { totalCategoryState } from "@/utils/HeaderAtom";
 import styled from "styled-components";
 import NonePage from "@/components/common/NonePage";
 
-interface SearchData {
-  data: {
-    
-  }
-}
+// interface SearchData {
+//   data: {
+//   }
+// }
 const SearchPage = () => {
   const bottomObserver = useRef(null);
   const categoryData = useRecoilValue(totalCategoryState);

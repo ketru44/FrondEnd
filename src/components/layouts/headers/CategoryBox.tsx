@@ -181,7 +181,7 @@ const Ul = styled.ul`
   list-style: none;
   padding-left: 0;
   padding-bottom: 0;
-  border: 1px ${Palette.main_gray} solid;
+  border: 1px ${Palette.button_gray} solid;
   border-radius: 2px;
   margin: 0;
   width: 4.2rem;
